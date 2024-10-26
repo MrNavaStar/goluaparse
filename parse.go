@@ -13,7 +13,7 @@ func preload(l *lua.LState, name string, api map[string]lua.LGFunction) {
 	})
 }
 
-func decodeValue(l *lua.LState, value interface{}) lua.LValue {
+func DecodeValue(l *lua.LState, value interface{}) lua.LValue {
 	switch converted := value.(type) {
 	case bool:
 		return lua.LBool(converted)
@@ -26,13 +26,13 @@ func decodeValue(l *lua.LState, value interface{}) lua.LValue {
 	case []interface{}:
 		arr := l.CreateTable(len(converted), 0)
 		for _, item := range converted {
-			arr.Append(decodeValue(l, item))
+			arr.Append(DecodeValue(l, item))
 		}
 		return arr
 	case map[string]interface{}:
 		tbl := l.CreateTable(0, len(converted))
 		for key, item := range converted {
-			tbl.RawSetH(lua.LString(key), decodeValue(l, item))
+			tbl.RawSetH(lua.LString(key), DecodeValue(l, item))
 		}
 		return tbl
 	case nil:

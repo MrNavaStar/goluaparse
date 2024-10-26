@@ -20,6 +20,6 @@ func decodeYAML(l *lua.LState) int {
 		l.Push(lua.LString(err.Error()))
 		return 2
 	}
-	l.Push(decodeValue(l, v))
+	l.Push(DecodeValue(l, v))
 	return 1
 }
