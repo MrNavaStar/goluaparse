@@ -6,6 +6,15 @@ import (
 	"github.com/yuin/gopher-lua"
 )
 
+func preload(l *lua.LState, name string, api map[string]lua.LGFunction) {
+	l.PreloadModule(name, func(l *lua.LState) int {
+		t := l.NewTable()
+		l.SetFuncs(t, api)
+		l.Push(t)
+		return 1
+	})
+}
+
 func decodeValue(l *lua.LState, value interface{}) lua.LValue {
 	switch converted := value.(type) {
 	case bool:

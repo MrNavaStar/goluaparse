@@ -6,26 +6,15 @@ import (
 	"github.com/yuin/gopher-lua"
 )
 
-var api = map[string]lua.LGFunction{
-	"encode": encode,
-	"decode": decode,
+var xmlApi = map[string]lua.LGFunction{
+	"decode": decodeXML,
 }
 
 func PreloadXML(l *lua.LState) {
-	l.PreloadModule("xml", func(l *lua.LState) int {
-		t := l.NewTable()
-		l.SetFuncs(t, api)
-		l.Push(t)
-		return 1
-	})
+	preload(l, "xml", xmlApi)
 }
 
-func encode(l *lua.LState) int {
-
-	return 1
-}
-
-func decode(l *lua.LState) int {
+func decodeXML(l *lua.LState) int {
 	var v interface{}
 	if err := xml.Unmarshal([]byte(l.ToString(1)), &v); err != nil {
 		l.Push(lua.LNil)
