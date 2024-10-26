@@ -8,9 +8,7 @@ import (
 
 func preload(l *lua.LState, name string, api map[string]lua.LGFunction) {
 	l.PreloadModule(name, func(l *lua.LState) int {
-		t := l.NewTable()
-		l.SetFuncs(t, api)
-		l.Push(t)
+		l.Push(l.SetFuncs(l.NewTable(), api))
 		return 1
 	})
 }
