@@ -11,7 +11,7 @@ var api = map[string]lua.LGFunction{
 	"decode": decode,
 }
 
-func Preload(l *lua.LState) {
+func PreloadXML(l *lua.LState) {
 	l.PreloadModule("xml", func(l *lua.LState) int {
 		t := l.NewTable()
 		l.SetFuncs(t, api)
