@@ -21,20 +21,30 @@ func toSlice(arg interface{}) (out []interface{}, ok bool) {
 
 // Pushes a representation of the given interface to the lua stack
 func PushGoInterface(l *lua.State, value interface{}) {
+	switch converted := value.(type) {
+	case bool:
+		l.PushBoolean(converted)
+		return
+	case int:
+		l.PushInteger(int64(converted))
+		return
+	case float64:
+		l.PushNumber(converted)
+		return
+	case string:
+		l.PushString(converted)
+		return
+	case []byte:
+		l.PushBytes(converted)
+		return
+	}
+
 	slice, ok := toSlice(value)
 	if ok {
 		value = slice
 	}
 
 	switch converted := value.(type) {
-	case bool:
-		l.PushBoolean(converted)
-	case int:
-		l.PushInteger(int64(converted))
-	case float64:
-		l.PushNumber(converted)
-	case string:
-		l.PushString(converted)
  	case []interface{}:
 		l.CreateTable(len(converted), 0)
 		for i, item := range converted {
