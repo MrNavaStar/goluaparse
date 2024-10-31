@@ -37,8 +37,9 @@ func PushGoInterface(l *lua.State, value interface{}) {
 		l.PushString(converted)
  	case []interface{}:
 		l.CreateTable(len(converted), 0)
-		for _, item := range converted {
+		for i, item := range converted {
 			PushGoInterface(l, item)
+			l.RawSeti(-2, i+1)
 		}
 	case map[string]interface{}:
 		l.CreateTable(0, len(converted))
