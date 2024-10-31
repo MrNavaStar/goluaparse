@@ -1,18 +1,10 @@
 package gluaparse
 
 import (
-	"encoding/json"
 	"reflect"
 
-	"github.com/yuin/gopher-lua"
+	"github.com/mrnavastar/golua/lua"
 )
-
-func preload(l *lua.LState, name string, api map[string]lua.LGFunction) {
-	l.PreloadModule(name, func(l *lua.LState) int {
-		l.Push(l.SetFuncs(l.NewTable(), api))
-		return 1
-	})
-}
 
 func toSlice(arg interface{}) (out []interface{}, ok bool) {
 	slice := reflect.ValueOf(arg)
@@ -27,7 +19,8 @@ func toSlice(arg interface{}) (out []interface{}, ok bool) {
     return out, true
 }
 
-func DecodeValue(l *lua.LState, value interface{}) lua.LValue {
+// Pushes a representation of the given interface to the lua stack
+func PushGoInterface(l *lua.State, value interface{}) {
 	slice, ok := toSlice(value)
 	if ok {
 		value = slice
@@ -35,27 +28,23 @@ func DecodeValue(l *lua.LState, value interface{}) lua.LValue {
 
 	switch converted := value.(type) {
 	case bool:
-		return lua.LBool(converted)
+		l.PushBoolean(converted)
 	case int:
-		return lua.LNumber(converted)
+		l.PushInteger(int64(converted))
 	case float64:
-		return lua.LNumber(converted)
+		l.PushNumber(converted)
 	case string:
-		return lua.LString(converted)
-	case json.Number:
-		return lua.LString(converted)
-	case []interface{}:
-		arr := l.CreateTable(len(converted), 0)
+		l.PushString(converted)
+ 	case []interface{}:
+		l.CreateTable(len(converted), 0)
 		for _, item := range converted {
-			arr.Append(DecodeValue(l, item))
+			PushGoInterface(l, item)
 		}
-		return arr
 	case map[string]interface{}:
-		tbl := l.CreateTable(0, len(converted))
+		l.CreateTable(0, len(converted))
 		for key, item := range converted {
-			tbl.RawSetH(lua.LString(key), DecodeValue(l, item))
+			PushGoInterface(l, item)
+			l.SetField(-2, key)
 		}
-		return tbl
 	}
-	return lua.LNil
 }

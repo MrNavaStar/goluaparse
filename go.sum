@@ -2,6 +2,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.5 h1:ZtcqGrnekaHpVLArFSe4HK5DoKx1T0rq2DwVB
 github.com/cpuguy83/go-md2man/v2 v2.0.5/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/mrnavastar/assist v0.0.0-20241019045358-9ca8d2f8ba47 h1:k7ALRT9JAxhsLkEcO0SHBtFa5VTXmhPPkuYm4vN+myo=
 github.com/mrnavastar/assist v0.0.0-20241019045358-9ca8d2f8ba47/go.mod h1:g7rvIBEUXmx/fU1fwrgUiIMzE5xc/7avDoqf3jWFqSY=
+github.com/mrnavastar/golua v0.0.0-20241031035359-a31a4e35dc17 h1:o+wz+4bSV+prtx4QbGYSc9mvIxGIJ6bocfm2PAVm9Gw=
+github.com/mrnavastar/golua v0.0.0-20241031035359-a31a4e35dc17/go.mod h1:wcgIcQdcKO4O44JaZIe8ijPZ7tU/dBFjmKrizjHleuo=
 github.com/russross/blackfriday/v2 v2.1.0 h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf35Ld67mk=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/urfave/cli/v2 v2.27.5 h1:WoHEJLdsXr6dDWoJgMq/CboDmyY/8HMMH1fTECbih+w=

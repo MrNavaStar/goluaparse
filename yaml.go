@@ -1,25 +1,21 @@
 package gluaparse
 
 import (
-	"github.com/yuin/gopher-lua"
+	"github.com/mrnavastar/golua/lua"
 	"gopkg.in/yaml.v3"
 )
 
-var yamlApi = map[string]lua.LGFunction{
+var YAML = map[string]lua.LuaGoFunction{
 	"decode": decodeYAML,
 }
 
-func PreloadYAML(l *lua.LState) {
-	preload(l, "yaml", yamlApi)
-}
-
-func decodeYAML(l *lua.LState) int {
+func decodeYAML(l *lua.State) int {
 	var v interface{}
 	if err := yaml.Unmarshal([]byte(l.ToString(1)), &v); err != nil {
-		l.Push(lua.LNil)
-		l.Push(lua.LString(err.Error()))
+		l.PushNil()
+		l.PushString(err.Error())
 		return 2
 	}
-	l.Push(DecodeValue(l, v))
+	PushGoInterface(l, v)
 	return 1
 }
