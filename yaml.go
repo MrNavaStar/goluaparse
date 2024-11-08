@@ -1,7 +1,8 @@
 package gluaparse
 
 import (
-	"github.com/mrnavastar/golua/lua"
+	"github.com/aarzilli/golua/lua"
+	"github.com/fiatjaf/lunatico"
 	"gopkg.in/yaml.v3"
 )
 
@@ -16,6 +17,6 @@ func decodeYAML(l *lua.State) int {
 		l.PushString(err.Error())
 		return 2
 	}
-	PushGoInterface(l, v)
+	lunatico.PushAny(l, v)
 	return 1
 }

@@ -3,7 +3,8 @@ package gluaparse
 import (
 	"encoding/json"
 
-	"github.com/mrnavastar/golua/lua"
+	"github.com/aarzilli/golua/lua"
+	"github.com/fiatjaf/lunatico"
 )
 
 var JSON = map[string]lua.LuaGoFunction{
@@ -17,6 +18,6 @@ func decodeJSON(l *lua.State) int {
 		l.PushString(err.Error())
 		return 2
 	}
-	PushGoInterface(l, v)
+	lunatico.PushAny(l, v)
 	return 1
 }
