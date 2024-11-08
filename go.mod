@@ -1,4 +1,4 @@
-module github.com/mrnavastar/gluaparse
+module github.com/mrnavastar/goluaparse
 
 go 1.22.7
 
