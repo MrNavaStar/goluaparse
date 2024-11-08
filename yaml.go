@@ -1,4 +1,4 @@
-package gluaparse
+package goluaparse
 
 import (
 	"github.com/aarzilli/golua/lua"
