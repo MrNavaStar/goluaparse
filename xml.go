@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 
 	"github.com/aarzilli/golua/lua"
-	"github.com/fiatjaf/lunatico"
+	"github.com/mrnavastar/lunatico"
 )
 
 var XML = map[string]lua.LuaGoFunction{

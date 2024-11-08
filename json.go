@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/aarzilli/golua/lua"
-	"github.com/fiatjaf/lunatico"
+	"github.com/mrnavastar/lunatico"
 )
 
 var JSON = map[string]lua.LuaGoFunction{

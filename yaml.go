@@ -2,7 +2,7 @@ package goluaparse
 
 import (
 	"github.com/aarzilli/golua/lua"
-	"github.com/fiatjaf/lunatico"
+	"github.com/mrnavastar/lunatico"
 	"gopkg.in/yaml.v3"
 )
 
