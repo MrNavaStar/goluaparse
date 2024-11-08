@@ -1,4 +1,4 @@
-package gluaparse
+package goluaparse
 
 import (
 	"encoding/xml"
