@@ -2,7 +2,7 @@ package goluaparse
 
 import (
 	"github.com/aarzilli/golua/lua"
-	"github.com/mrnavastar/lunatico"
+	"github.com/stevedonovan/luar"
 	"gopkg.in/yaml.v3"
 )
 
@@ -17,6 +17,6 @@ func decodeYAML(l *lua.State) int {
 		l.PushString(err.Error())
 		return 2
 	}
-	lunatico.PushAny(l, v)
+	luar.GoToLua(l, v)
 	return 1
 }

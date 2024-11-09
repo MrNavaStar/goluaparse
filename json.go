@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/aarzilli/golua/lua"
-	"github.com/mrnavastar/lunatico"
+	"github.com/stevedonovan/luar"
 )
 
 var JSON = map[string]lua.LuaGoFunction{
@@ -18,6 +18,6 @@ func decodeJSON(l *lua.State) int {
 		l.PushString(err.Error())
 		return 2
 	}
-	lunatico.PushAny(l, v)
+	luar.GoToLua(l, v)
 	return 1
 }
