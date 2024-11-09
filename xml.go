@@ -1,10 +1,8 @@
 package goluaparse
 
 import (
-	"strings"
-
 	"github.com/aarzilli/golua/lua"
-	"github.com/sbabiv/xml2map"
+	"github.com/clbanning/mxj"
 	"github.com/stevedonovan/luar"
 )
 
@@ -13,8 +11,7 @@ var XML = map[string]lua.LuaGoFunction{
 }
 
 func decodeXML(l *lua.State) int {
-	decoder := xml2map.NewDecoder(strings.NewReader(l.ToString(1)))
-	result, err := decoder.Decode()
+	result, err := mxj.NewMapXml([]byte(l.ToString(1)))
 	if err != nil {
 		l.PushNil()
 		l.PushString(err.Error())
