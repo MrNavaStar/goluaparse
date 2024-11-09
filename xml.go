@@ -1,10 +1,11 @@
 package goluaparse
 
 import (
-	"encoding/xml"
+	"strings"
 
 	"github.com/aarzilli/golua/lua"
-	"github.com/mrnavastar/lunatico"
+	"github.com/sbabiv/xml2map"
+	"github.com/stevedonovan/luar"
 )
 
 var XML = map[string]lua.LuaGoFunction{
@@ -12,12 +13,14 @@ var XML = map[string]lua.LuaGoFunction{
 }
 
 func decodeXML(l *lua.State) int {
-	var v interface{}
-	if err := xml.Unmarshal([]byte(l.ToString(1)), &v); err != nil {
+	decoder := xml2map.NewDecoder(strings.NewReader(l.ToString(1)))
+	result, err := decoder.Decode()
+	if err != nil {
 		l.PushNil()
 		l.PushString(err.Error())
 		return 2
 	}
-	lunatico.PushAny(l, v)
+
+	luar.GoToLua(l, result)
 	return 1
 }
